@@ -1,0 +1,11 @@
+[gd_resource type="AnimationLibrary" load_steps=3 format=3 uid="uid://bipfnkkoy2bd3"]
+
+[ext_resource type="Animation" uid="uid://dq772qe53njfa" path="res://mixamo_plugin/strut_walking.res" id="1_4tjud"]
+
+[sub_resource type="Animation" id="Animation_s2il7"]
+
+[resource]
+_data = {
+&"1": SubResource("Animation_s2il7"),
+&"strut_walking": ExtResource("1_4tjud")
+}

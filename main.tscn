@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://cf7j1bllre022"]
+
+[ext_resource type="PackedScene" uid="uid://bwb6yohus28xv" path="res://player.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_1bvp3"]
+[ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="3_lquwl"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_7mycd"]
+[ext_resource type="PackedScene" uid="uid://c5vk75mvnqxku" path="res://map_test.tscn" id="5_lquwl"]
+
+[sub_resource type="Resource" id="Resource_272bh"]
+script = ExtResource("4_7mycd")
+
+[node name="Main" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.7071068, 0.68301266, 0.1830127, -0.18301266, -0.4267767, 0.88564545, 0.6830126, 0.59275234, 0.4267767, 253, -425, -4)
+shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("1_ig7tw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -12)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+physics_interpolation_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -8)
+
+[node name="PhantomCameraHost" type="Node" parent="Camera3D"]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("2_1bvp3")
+metadata/_custom_type_script = "uid://bd046eokvcnu2"
+
+[node name="PhantomCamera3D" type="Node3D" parent="." node_paths=PackedStringArray("follow_targets")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -8)
+top_level = true
+script = ExtResource("3_lquwl")
+follow_mode = 3
+follow_targets = [NodePath("../Player")]
+tween_resource = SubResource("Resource_272bh")
+follow_offset = Vector3(0, 2, 1)
+follow_damping = true
+follow_distance = 10.0
+auto_follow_distance = true
+auto_follow_distance_min = 3.0
+auto_follow_distance_max = 10.0
+spring_length = 10.0
+metadata/_custom_type_script = "uid://csjccrhj5wnx7"
+
+[node name="MapTest" parent="." instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -13)

@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5vk75mvnqxku"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_63peu"]
+size = Vector3(20, 1, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_q1m20"]
+size = Vector3(20, 1, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_104vu"]
+size = Vector3(5, 0.5, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_c7aqf"]
+size = Vector3(5, 0.5, 2)
+
+[node name="MapTest" type="Node3D"]
+
+[node name="Unterer Boden" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Unterer Boden"]
+shape = SubResource("BoxShape3D_63peu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Unterer Boden"]
+mesh = SubResource("BoxMesh_q1m20")
+
+[node name="Platform 1" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform 1"]
+shape = SubResource("BoxShape3D_104vu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platform 1"]
+mesh = SubResource("BoxMesh_c7aqf")
+
+[node name="Platform 2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform 2"]
+shape = SubResource("BoxShape3D_104vu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platform 2"]
+mesh = SubResource("BoxMesh_c7aqf")
+skeleton = NodePath("../../Platform 2")
